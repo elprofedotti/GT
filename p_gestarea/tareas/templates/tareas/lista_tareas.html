@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Lista de tareas</h1>
+{% if tareas %}
+    <ul>
+    {% for tarea in tareas %}
+        <li>
+            <h2>{{ tarea.nombre }}</h2>
+            <p>Descripción: {{ tarea.descripcion }}</p>
+            <p>Fecha de vencimiento: {{ tarea.fecha_vencimiento }}</p>
+            <p>Estado: {{ tarea.estado }}</p>
+            <p>Prioridad: {{ tarea.prioridad }}</p>
+            <p>Categoría: {{ tarea.categoria.nombre }}</p>
+            <p>Asignada a: {{ tarea.asignada_a.username }}</p>
+            <p>Es pública: {{ tarea.es_publica }}</p>
+            <!-- Aca enlaces para ver y editar la tarea -->
+            <a href="{% url 'ver_tarea' tarea.id %}">Ver</a>
+            <a href="{% url 'editar_tarea' tarea.id %}">Editar</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay tareas para mostrar.</p>
+    <!-- Aca  enlace para agregar una tarea -->
+    <a href="{% url 'crear_tarea' %}">Agregar tarea</a>
+{% endif %}
+{% endblock %}

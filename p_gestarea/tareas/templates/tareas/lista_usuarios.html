@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<!-- lista de usuarios -->
+<h1>Lista de usuarios</h1>
+
+<ul>
+{% for usuario in usuarios %}
+    <li>
+        Nombre de usuario: {{ usuario.username }}, 
+        Correo electrónico: {{ usuario.email }},
+        Tipo de usuario: {% if usuario.is_superuser %}Administrador{% else %}Usuario normal{% endif %}
+    </li>
+{% empty %}
+    <li>No hay usuarios registrados.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
+

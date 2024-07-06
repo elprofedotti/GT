@@ -1,0 +1,174 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<center><h1>Bienvenido ADMINISTRADOR</h1></center>
+<br>
+<h2>Total de tareas: {{ tareas_tot }}</h2>
+<br>
+
+<!-- pendientes  -->
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#uno" aria-expanded="true" aria-controls="uno">
+        <h3>Tareas pendientes: {{ tareas_pendientes_tot }}</h3>
+      </button>
+    </h2>
+    <div id="uno" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+		<div class="accordion-body">
+			<div>
+				{% for tarea in tareas_pendientes %}
+				<a href="#" data-bs-toggle="modal" data-bs-target="#detalleTareaModal{{tarea.id}}">{{ tarea.nombre }}</a>
+				<span><strong>Comentarios:</strong> {{tarea.comentario_set.all.count}}</span>
+				<span><strong>Prioridad:</strong> {{ tarea.prioridad }}</span>
+				<!-- Modal -->
+					<div class="modal fade" id="detalleTareaModal{{tarea.id}}" tabindex="-1" aria-labelledby="ModalTareas" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header ">
+								<h1 class="modal-title fs-5" id="ModalTareas">Detalle de tarea</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p class="fst-italic">{{ tarea.descripcion }}</p>
+								<div class="text-success">
+									<hr>
+								</div>
+								<p><strong>Estado:</strong> {{ tarea.estado }}
+								<strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+								<p><strong>Comentarios:</strong></p>
+								<!-- Muestro los comentarios -->
+								<ol>
+								{% for comentario in tarea.comentario_set.all %}
+									
+										<li>
+											<p>{{ comentario.texto }} ({{ comentario.creado_por.username }})</p>
+											
+										</li>
+									
+								{% endfor %}
+								</ol>
+							</div>
+						</div>
+					  </div>
+					</div>
+				<!-- Fin del Modal -->
+			</div>
+			{% endfor %}	
+		</div>
+    </div>
+</div>
+
+<!-- en progreso -->
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dos" aria-expanded="false" aria-controls="dos">
+        <h3>Tareas en progreso: {{ tareas_en_progreso_tot }}</h3>
+      </button>
+    </h2>
+    <div id="dos" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+		<div class="accordion-body">
+			<div>
+				{% for tarea in tareas_en_progreso %}
+				<a href="#" data-bs-toggle="modal" data-bs-target="#detalleTareaModal{{tarea.id}}">{{ tarea.nombre }}</a>
+				<span><strong>Comentarios:</strong> {{tarea.comentario_set.all.count}}</span>
+				<span><strong>Prioridad:</strong> {{ tarea.prioridad }}</span>
+				<!-- Modal -->
+					<div class="modal fade" id="detalleTareaModal{{tarea.id}}" tabindex="-1" aria-labelledby="ModalTareas" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header ">
+								<h1 class="modal-title fs-5" id="ModalTareas">Detalle de tarea</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p class="fst-italic">{{ tarea.descripcion }}</p>
+								<div class="text-success">
+									<hr>
+								</div>
+								<p><strong>Estado:</strong> {{ tarea.estado }}
+								<strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+								<p><strong>Comentarios:</strong></p>
+								<!-- Muestro los comentarios -->
+								<ol>
+								{% for comentario in tarea.comentario_set.all %}
+									
+										<li>
+											<p>{{ comentario.texto }} ({{ comentario.creado_por.username }})</p>
+											
+										</li>
+									
+								{% endfor %}
+								</ol>
+							</div>
+						</div>
+					  </div>
+					</div>
+				<!-- Fin del Modal -->
+			</div>
+			{% endfor %}	
+			</div>
+    </div>
+</div>
+
+<!-- completadas -->
+<div class="accordion" id="accordionExample">
+<div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tres" aria-expanded="false" aria-controls="tres">
+        <h3>Tareas COMPLETADAS: {{ tareas_completadas_tot }}</h3>
+      </button>
+    </h2>
+    <div id="tres" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+		<div class="accordion-body">
+			<div>
+				{% for tarea in tareas_completadas %}
+				<a href="#" data-bs-toggle="modal" data-bs-target="#detalleTareaModal{{tarea.id}}">{{ tarea.nombre }}</a>
+				<span><strong>Comentarios:</strong> {{tarea.comentario_set.all.count}}</span>
+				<span><strong>Prioridad:</strong> {{ tarea.prioridad }}</span>
+				<!-- Modal -->
+					<div class="modal fade" id="detalleTareaModal{{tarea.id}}" tabindex="-1" aria-labelledby="ModalTareas" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header ">
+								<h1 class="modal-title fs-5" id="ModalTareas">Detalle de tarea</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p class="fst-italic">{{ tarea.descripcion }}</p>
+								<div class="text-success">
+									<hr>
+								</div>
+								<p><strong>Estado:</strong> {{ tarea.estado }}
+								<strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+								<p><strong>Comentarios:</strong></p>
+								<!-- Muestro los comentarios -->
+								<ol>
+								{% for comentario in tarea.comentario_set.all %}
+									
+										<li>
+											<p>{{ comentario.texto }} ({{ comentario.creado_por.username }})</p>
+											
+										</li>
+									
+								{% endfor %}
+								</ol>
+							</div>
+						</div>
+					  </div>
+					</div>
+				<!-- Fin del Modal -->
+			</div>
+			{% endfor %}	
+			</div>
+		</div>
+    </div>
+<br><br><br>
+<h2>Más:</h2>
+<ul>
+    <li><a href="{% url 'lista_categorias' %}">Lista de categorías</a></li>
+    <li><a href="{% url 'lista_comentarios' %}">Lista de comentarios</a></li>
+</ul>
+
+{% endblock %}

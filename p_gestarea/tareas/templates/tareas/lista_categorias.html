@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<!-- listra de catessss -->
+<h1>Lista de categorías</h1>
+<ul>
+    {% for categoria in categorias %}
+        <li>
+            {{ categoria.nombre }}
+        </li>
+    {% empty %}
+        <li>No hay categorías.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

@@ -1,0 +1,185 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<center><h1>Bienvenido a nuestra aplicación de tareas</h1></center>
+
+{% if user.is_authenticated %}
+    <h4>¡Hola, {{ user.username }}!</h4>
+	<br>
+	<hr class="border border-primary border-2 opacity-75">
+	<h3 class="opacity-50">
+	  Tareas
+	  <small class="text-body-secondary">PÚBLICAS</small>
+	</h3>
+	<hr class="border border-primary border-2 opacity-75">
+	<table class="table table-borderless">
+		  
+		  <thead>
+			<td><strong>Nombre<strong></td>
+			<td><strong>Asignada a<strong></td>
+			<td><strong>Estado<strong></td>
+			<td><strong>Prioridad<strong></td>
+			<td><strong>Comentarios<strong></td>
+		  </thead>
+		  
+			<tbody>
+	{% for tarea, form in tareas_publicas %}
+		<tr>
+			<td>
+			<a class="link-offset-1"  href="#" data-bs-toggle="modal" data-bs-target="#detalleTareaModal{{tarea.id}}">{{ tarea.nombre }} </a>
+			</td>
+			<td>
+			(Asignada a: {{ tarea.asignada_a.username }})
+			</td>
+			<td>
+			<span>Estado: </span>{{ tarea.estado }}
+			</td>
+			<td>
+			<span>Prioridad: </span>{{ tarea.prioridad }}
+			</td>
+			<td>
+			<span>Comentarios: </span>{{ tarea.comentarios_publicos }}
+			</td>
+			
+			
+			<!-- Modal. -->
+				<div class="modal fade" id="detalleTareaModal{{tarea.id}}" tabindex="-1" aria-labelledby="ModalTareas" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					  <div class="modal-header ">
+						<h1 class="modal-title fs-5" id="ModalTareas">Detalle de tarea</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					  </div>
+						<div class="modal-body">
+							<p class="fst-italic">{{ tarea.descripcion }}</p>
+							<div class="text-success">
+	  <hr>
+	</div>
+							<p><strong>Estado:</strong> {{ tarea.estado }}
+							<strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+							<p><strong>Comentarios:</strong></p>
+							<!-- Muestro los comentarios -->
+							<ol>
+							{% for comentario in tarea.comentario_set.all %}
+								{% if comentario.visibilidad == 'PUBLICO' %}
+									<li>
+										<p>{{ comentario.texto }} ({{ comentario.creado_por.username }})</p>
+										
+									</li>
+								{% endif %}
+							{% endfor %}
+							</ol>
+							<hr class="border border-danger border-2 opacity-50">
+							<p class="text-center"><strong>Modificación de tarea</strong></p>
+							<form method="post" action="{% url 'cambiar_estado_tarea' tarea.id %}">
+								{% csrf_token %}
+								{{ form.as_p }}
+							
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+								<button type="submit" class="btn btn-primary">Guardar cambios</button>
+							  </div>
+							</form>
+						</div>
+					  
+					</div>
+				  </div>
+				</div>
+			
+			<!-- Fin del Modal -->
+			<td>
+		</tr>
+	{% endfor %}
+	</table>
+	<hr class="border border-danger border-2 opacity-50">
+	<h3 class="opacity-50">
+	  Tus tareas
+	  <small class="text-body-secondary">PRIVADAS</small>
+	</h3>
+	<hr class="border border-danger border-2 opacity-50">
+	<table class="table table-borderless">
+		  
+		  <thead>
+			<td><strong>Nombre<strong></td>
+			<td><strong>Asignada a<strong></td>
+			<td><strong>Estado<strong></td>
+			<td><strong>Prioridad<strong></td>
+			<td><strong>Comentarios<strong></td>
+		  </thead>
+		  
+			<tbody>
+	{% for tarea, form in tareas_privadas %}
+		<tr>
+			<td>
+			<a class="link-offset-1"  href="#" data-bs-toggle="modal" data-bs-target="#detalleTareaModal{{tarea.id}}">{{ tarea.nombre }} </a>
+			</td>
+			<td>
+			(Asignada a: {{ tarea.asignada_a.username }})
+			</td>
+			<td>
+			<span>Estado: </span>{{ tarea.estado }}
+			</td>
+			<td>
+			<span>Prioridad: </span>{{ tarea.prioridad }}
+			</td>
+			<td>
+			<span>Comentarios: </span>{{ tarea.comentario_set.all.count }}
+			</td>
+			<!-- Modal -->
+				<div class="modal fade" id="detalleTareaModal{{tarea.id}}" tabindex="-1" aria-labelledby="ModalTareas" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h1 class="modal-title fs-5" id="ModalTareas">Detalle de tarea</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					  </div>
+						<div class="modal-body">
+							<p class="fst-italic">{{ tarea.descripcion }}</p>
+							<div class="text-success">
+	  <hr>
+	</div>
+							<p><strong>Estado:</strong> {{ tarea.estado }}
+							<strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+							<p><strong>Comentarios:</strong></p>
+							<!-- Muestro los comentarios -->
+							<ol>
+							{% for comentario in tarea.comentario_set.all %}
+								
+									<li>
+										<p>{{ comentario.texto }} ({{ comentario.creado_por.username }})</p>
+										
+									</li>
+								
+							{% endfor %}
+							</ol>
+							<hr class="border border-danger border-2 opacity-50">
+							<p class="text-center"><strong>Modificación de tarea</strong></p>
+							<form method="post" action="{% url 'cambiar_estado_tarea' tarea.id %}">
+								{% csrf_token %}
+								{{ form.as_p }}
+							
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+								<button type="submit" class="btn btn-primary">Guardar cambios</button>
+							  </div>
+							</form>
+						</div>
+					  
+					</div>
+				  </div>
+				</div>
+			
+			<td>
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+    <p>Por favor, <a href="{% url 'inicio_sesion' %}">inicia sesión</a> o <a href="{% url 'registro_usuario' %}">regístrate</a>.</p>
+	{% load static %}
+	<img src="{% static 'imagenes/fondo.jpg' %}" alt="mujer asignando tareas">
+	
+	
+{% endif %}
+	
+
+{% endblock %}

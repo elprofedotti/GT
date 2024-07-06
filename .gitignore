@@ -1,0 +1,7 @@
+gestarea/
+__pycache__/
+*.py[cod]
+*$py.class
+entorno.env
+proyecto.md
+modificar.py

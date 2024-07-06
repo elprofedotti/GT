@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tu aplicación de tareas</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+
+</head>
+<body>
+    <header>
+        <!-- Aca podría tener un menú de navegación y otras cosas -->
+		<center><h1 class="text-light bg-dark">GESTAREA</h1></center>
+    </header>
+    <main>
+		<div class="container-sm" >
+        {% block content %}
+        <!-- El contenido específico de cada página va aca!!-->
+        {% endblock %}
+		</div>
+    </main>
+    <footer>
+        <!-- Aca podría ser información de contacto, enlaces a redes sociales, etc. -->
+		{% if user.is_authenticated %}
+			{% if request.user.is_superuser %}
+				<a href="{% url 'admin' %}">Área administración </a>
+			{% endif %}
+		{% else %}
+			<a href="{% url 'admin' %}">Área administración </a>
+		{% endif %}
+		{% if request.META.HTTP_REFERER %}
+			
+			|<a href="{{ request.META.HTTP_REFERER }}"> Volver</a>
+		{% else %}
+			
+			|<a href="{% url 'inicio' %}"> Volver</a>
+		{% endif %}
+		{% if user.is_authenticated %}
+			|<a href="{% url 'logout' %}"> Salir</a>
+		{% endif %}
+		
+		<!-- <br><br> -->
+		<!-- <button onclick="goBack()">Volver</button> -->
+		<!-- <script> -->
+			<!-- function goBack() { -->
+			  <!-- window.history.back(); -->
+			<!-- } -->
+		<!-- </script> -->
+    </footer>
+</body>
+</html>
