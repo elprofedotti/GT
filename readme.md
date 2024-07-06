@@ -21,7 +21,7 @@ Para ejecutar este proyecto, necesitarás tener instalado Python 3.8 (o superior
    Si planeas hacer cambios en el proyecto y subirlos a tu propio repositorio (GitHub, Bitbucket, etc) es recomendable que configures tu "fork" del repositorio original.
         
 2. Navega al directorio del proyecto:
-
+   (Suponiendo creaste la carpeta gestarea, y clonaste ahi el repo)
    ```
    cd gestarea
    ```
@@ -89,7 +89,7 @@ Para desplegar la aplicación, consulta la [documentación de Django](https://do
 
 ## 🖋️ Autores
 
--**Maximiliano Gauthier**
+- **Maximiliano Gauthier**
 - **Matías Dotti**
 
 ---
