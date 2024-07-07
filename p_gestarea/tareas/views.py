@@ -8,6 +8,9 @@ from django.db.models import Q
 
 	
 def inicio(request):
+    if not request.user.is_authenticated:
+        return redirect('inicio_sesion')
+        
     if request.user.is_superuser:
         # plantilla de inicio para administrador.
         categorias = Categoria.objects.all()

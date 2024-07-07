@@ -22,14 +22,16 @@
 		</div>
     </main>
     <footer>
+        <div class="container">
+        <br><hr>
         <!-- Aca podría ser información de contacto, enlaces a redes sociales, etc. -->
-		{% if user.is_authenticated %}
-			{% if request.user.is_superuser %}
+		<!-- {% if user.is_authenticated %} -->
+			<!-- {% if request.user.is_superuser %} -->
 				<a href="{% url 'admin' %}">Área administración </a>
-			{% endif %}
-		{% else %}
+			<!-- {% endif %}
+		{% else %} -->
 			<a href="{% url 'admin' %}">Área administración </a>
-		{% endif %}
+		<!-- {% endif %} -->
 		{% if request.META.HTTP_REFERER %}
 			
 			|<a href="{{ request.META.HTTP_REFERER }}"> Volver</a>
@@ -48,6 +50,7 @@
 			  <!-- window.history.back(); -->
 			<!-- } -->
 		<!-- </script> -->
+    </div>
     </footer>
 </body>
 </html>
