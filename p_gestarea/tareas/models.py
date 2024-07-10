@@ -1,11 +1,11 @@
-from django.db import models
+from django.db import models # type: ignore
 #from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.utils.translation import gettext as _
-from django.contrib.auth.models import User
+from django.utils.translation import gettext as _ # type: ignore
+from django.contrib.auth.models import User # type: ignore
 
 
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.contrib.auth.models import AbstractUser # type: ignore
+from django.db import models # type: ignore
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200)

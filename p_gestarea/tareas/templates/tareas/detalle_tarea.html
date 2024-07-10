@@ -1,13 +1,24 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<!-- mostrando detalle tareas -->
-<h1>Detalle de tarea: {{ tarea.nombre }}</h1>
-<p>Descripción: {{ tarea.descripcion }}</p>
-<p>Fecha de vencimiento: {{ tarea.fecha_vencimiento }}</p>
-<p>Estado: {{ tarea.estado }}</p>
-<p>Prioridad: {{ tarea.prioridad }}</p>
-<p>Categoría: {{ tarea.categoria.nombre }}</p>
-<p>Asignada a: {{ tarea.asignada_a.username }}</p>
-<p>Es pública: {{ tarea.es_publica }}</p>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h3">Detalle de Tarea: {{ tarea.nombre }}</h1>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Descripción:</strong> {{ tarea.descripcion }}</p>
+            <p class="card-text"><strong>Fecha de vencimiento:</strong> {{ tarea.fecha_vencimiento|date:"d M Y H:i" }}</p>
+            <p class="card-text"><strong>Estado:</strong> {{ tarea.estado }}</p>
+            <p class="card-text"><strong>Prioridad:</strong> {{ tarea.prioridad }}</p>
+            <p class="card-text"><strong>Categoría:</strong> {{ tarea.categoria.nombre }}</p>
+            <p class="card-text"><strong>Asignada a:</strong> {{ tarea.asignada_a.username }}</p>
+            <p class="card-text"><strong>Es pública:</strong> {{ tarea.es_publica }}</p>
+        </div>
+        <div class="card-footer text-right">
+            <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">Volver a la lista de tareas</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

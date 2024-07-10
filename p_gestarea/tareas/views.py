@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm # type: ignore
 from .forms import CambioTareaForm, TareaForm, TareaFormAdmin
 from django.db import connection # type: ignore
 from django.db.models import Q # type: ignore
+from django.contrib.auth.decorators import login_required # type: ignore
 
 	
 def inicio(request):
@@ -213,3 +214,11 @@ def agregar_tarea_admin(request):
         form = TareaFormAdmin()
     
     return render(request, 'tareas/agregar_tarea_admin.html', {'form': form})
+    
+@login_required
+def eliminar_tarea(request, id_tarea):
+    tarea = get_object_or_404(Tarea, id=id_tarea)
+    if request.method == 'POST':
+        tarea.delete()
+        return redirect('lista_tareas')
+    return render(request, 'tareas/eliminar_tarea_confirmacion.html', {'tarea': tarea})

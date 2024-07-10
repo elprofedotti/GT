@@ -1,28 +1,36 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Lista de tareas</h1>
-{% if tareas %}
-    <ul>
-    {% for tarea in tareas %}
-        <li>
-            <h2>{{ tarea.nombre }}</h2>
-            <p>Descripción: {{ tarea.descripcion }}</p>
-            <p>Fecha de vencimiento: {{ tarea.fecha_vencimiento }}</p>
-            <!-- <p>Estado: {{ tarea.estado }}</p>
-            <p>Prioridad: {{ tarea.prioridad }}</p>
-            <p>Categoría: {{ tarea.categoria.nombre }}</p>
-            <p>Es pública: {{ tarea.es_publica }}</p> -->
-            <p>Asignada a: {{ tarea.asignada_a.username }}</p>
-            <!-- Aca enlaces para ver y editar la tarea -->
-            <a href="{% url 'detalle_tarea' tarea.id %}">Ver</a>
-            
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No hay tareas para mostrar.</p>
-    <!-- Aca  enlace para agregar una tarea -->
-    <a href="{% url 'crear_tarea' %}">Agregar tarea</a>
-{% endif %}
+<div class="container">
+    <h1 class="mb-4">Lista de Tareas</h1>
+    {% if tareas %}
+        <div class="row">
+            {% for tarea in tareas %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tarea.nombre }}</h5>
+                            <p class="card-text">{{ tarea.descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">Fecha de vencimiento: {{ tarea.fecha_vencimiento|date:"d M Y H:i" }}</small></p>
+                            <p class="card-text"><small class="text-muted">Asignada a: {{ tarea.asignada_a.username }}</small></p>
+                            <p class="card-text"><small class="text-muted">Tipo de Tarea:<span style="color: rgb(255, 242, 0);background-color: rgb(141, 138, 141);"> {{ tarea.categoria }} </span> </small></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'detalle_tarea' tarea.id %}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                    <form method="post" action="{% url 'eliminar_tarea' tarea.id %}" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta tarea?');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay tareas para mostrar.</p>
+        <a href="{% url 'crear_tarea' %}" class="btn btn-primary">Agregar tarea</a>
+    {% endif %}
+</div>
 {% endblock %}

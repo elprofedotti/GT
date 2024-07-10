@@ -19,5 +19,7 @@ urlpatterns = [
 	path('chau/', views.chau, name='chau'),
 	path('agregar_tarea/', views.agregar_tarea, name='agregar_tarea'),
 	path('agregar_tareaSQL/', views.agregar_tareaSQL, name='agregar_tareaSQL'),
-	 path('agregar_tarea_admin/', views.agregar_tarea_admin, name='agregar_tarea_admin'), 
+	path('agregar_tarea_admin/', views.agregar_tarea_admin, name='agregar_tarea_admin'), 
+	path('eliminar_tarea/<int:id_tarea>/', views.eliminar_tarea, name='eliminar_tarea'),
 ]
+

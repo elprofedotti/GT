@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 #necesito para mis agregados:
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 import os
 #------------
 
@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-nb4rqh150-%-(o5$!6^=xo!c+2x@372o@zng+l7t9e@ruxe7@2
 DEBUG = True
 
 #aca configuro para entrar a la app desde otras compus de la red. Atento al ip que puede cambiar!!
-ALLOWED_HOSTS = ['127.0.0.1','192.168.1.41']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.41','gestiondetareas.com']
 
 
 # Application definition

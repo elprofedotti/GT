@@ -96,11 +96,12 @@
             <!-- Aca podría ser información de contacto, enlaces a redes sociales, etc. -->
             <!-- {% if user.is_authenticated %} -->
             <!-- {% if request.user.is_superuser %} -->
-            <!-- <a href="{% url 'admin' %}">Área administración</a> -->
+            <a href="{% url 'admin' %}" style="color: yellow;">Área administración</a>
             <!-- {% endif %}
             {% else %} -->
             <a href="{% url 'admin' %}">Área administración</a>
             <!-- {% endif %} -->
+            |<a href="{% url 'inicio' %}"> Inicio</a>
             {% if request.META.HTTP_REFERER %}
                 |<a href="{{ request.META.HTTP_REFERER }}"> Volver</a>
             {% else %}
