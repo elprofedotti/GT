@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+{% load form_extras %}  <!-- Aquí cargamos el filtro -->
+
+{% block content %}
+<div class="container form-container">
+    <h1 class="text-center">Agregar Nueva Tarea</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_nombre" class="form-label">Nombre</label>
+            {{ form.nombre|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_descripcion" class="form-label">Descripción</label>
+            {{ form.descripcion|add_class:"form-control" }}
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="id_fecha_vencimiento" class="form-label">Fecha de Vencimiento</label>
+                <!-- {{ form.fecha_vencimiento|add_class:"form-control" }} -->
+                {{ form.fecha_vencimiento|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="id_estado" class="form-label">Estado</label>
+                {{ form.estado|add_class:"form-control" }}
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="id_prioridad" class="form-label">Prioridad</label>
+                {{ form.prioridad|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="id_categoria" class="form-label">Categoría</label>
+            {{ form.categoria|add_class:"form-control" }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form.es_publica|add_class:"form-check-input" }} 
+            <label for="id_es_publica" class="form-check-label">Es Pública</label>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Guardar Tarea</button>
+    </form>
+</div>
+{% endblock %}

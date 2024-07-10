@@ -1,22 +1,27 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<center><h1>Bienvenido a nuestra aplicación de tareas</h1></center>
+<center><h1 style="color: rgb(186, 186, 186);">Dashboard Usuario.</h1></center>
 
 {% if user.is_authenticated %}
     <h4>¡Hola, {{ user.username }}!</h4>
 	<br>
 	<hr class="border border-primary border-2 opacity-75">
+	<a href="{% url 'agregar_tarea' %}" class="btn btn-success">Agregar Nueva Tarea</a>
+	<a href="{% url 'agregar_tareaSQL' %}" class="btn btn-secondary">Agregar Nueva Tarea (SQL)</a>
+	<br><br>
 	<h3 class="opacity-50">
 	  Tareas
 	  <small class="text-body-secondary">PÚBLICAS</small>
 	</h3>
+		<hr>
 	<hr class="border border-primary border-2 opacity-75">
 	<table class="table table-borderless">
 		  
 		  <thead>
 			<td><strong>Nombre<strong></td>
 			<td><strong>Asignada a<strong></td>
+			<td><strong>Vencimiento<strong></td>
 			<td><strong>Estado<strong></td>
 			<td><strong>Prioridad<strong></td>
 			<td><strong>Comentarios<strong></td>
@@ -31,6 +36,10 @@
 			<td>
 			(Asignada a: {{ tarea.asignada_a.username }})
 			</td>
+			<td>
+				{{ tarea.fecha_vencimiento|date:"d M Y, H:i" }} 
+				<!-- Fecha formateada ej.: 29 Jul 2023, 12:00  -->
+				</td>
 			<td>
 			<span>Estado: </span>{{ tarea.estado }}
 			</td>

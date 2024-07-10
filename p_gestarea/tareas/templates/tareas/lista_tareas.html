@@ -9,14 +9,14 @@
             <h2>{{ tarea.nombre }}</h2>
             <p>Descripción: {{ tarea.descripcion }}</p>
             <p>Fecha de vencimiento: {{ tarea.fecha_vencimiento }}</p>
-            <p>Estado: {{ tarea.estado }}</p>
+            <!-- <p>Estado: {{ tarea.estado }}</p>
             <p>Prioridad: {{ tarea.prioridad }}</p>
             <p>Categoría: {{ tarea.categoria.nombre }}</p>
+            <p>Es pública: {{ tarea.es_publica }}</p> -->
             <p>Asignada a: {{ tarea.asignada_a.username }}</p>
-            <p>Es pública: {{ tarea.es_publica }}</p>
             <!-- Aca enlaces para ver y editar la tarea -->
-            <a href="{% url 'ver_tarea' tarea.id %}">Ver</a>
-            <a href="{% url 'editar_tarea' tarea.id %}">Editar</a>
+            <a href="{% url 'detalle_tarea' tarea.id %}">Ver</a>
+            
         </li>
     {% endfor %}
     </ul>

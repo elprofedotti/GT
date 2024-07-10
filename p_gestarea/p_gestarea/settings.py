@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-nb4rqh150-%-(o5$!6^=xo!c+2x@372o@zng+l7t9e@ruxe7@2
 DEBUG = True
 
 #aca configuro para entrar a la app desde otras compus de la red. Atento al ip que puede cambiar!!
-ALLOWED_HOSTS = ['127.0.0.1','192.168.1.39']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.41']
 
 
 # Application definition
@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
