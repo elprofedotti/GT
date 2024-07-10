@@ -1,6 +1,6 @@
 #los "endpoints!"
-from django.urls import path
-from django.contrib.auth.views import LogoutView
+from django.urls import path  # type: ignore
+from django.contrib.auth.views import LogoutView # type: ignore
 from . import views
 
 urlpatterns = [
