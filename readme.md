@@ -90,6 +90,8 @@ Para desplegar la aplicación, consulta la [documentación de Django](https://do
 ## 🖋️ Autores
 
 - **Maximiliano Gauthier**
+- **Rocío Leggerini**
+- **Joaquin Lopes**
 - **Matías Dotti**
 
 ---
