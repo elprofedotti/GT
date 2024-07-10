@@ -1,9 +1,11 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
-<center><h1 style="color: rgb(186, 186, 186);">Dashboard Usuario.</h1></center>
+
 
 {% if user.is_authenticated %}
+<center><h1 style="color: rgb(186, 186, 186);">Dashboard Usuario.</h1></center>
     <h4>¡Hola, {{ user.username }}!</h4>
 	<br>
 	<hr class="border border-primary border-2 opacity-75">
@@ -183,9 +185,24 @@
 	{% endfor %}
 	</table>
 {% else %}
-    <p>Por favor, <a href="{% url 'inicio_sesion' %}">inicia sesión</a> o <a href="{% url 'registro_usuario' %}">regístrate</a>.</p>
-	{% load static %}
-	<img src="{% static 'imagenes/fondo.jpg' %}" alt="mujer asignando tareas">
+	<div class="container">
+	    <div class="row align-items-center">
+	        <div class="col-md-6">
+	            
+	            <!-- <img src="https://via.placeholder.com/500x300" alt="Imagen de ejemplo" class="img-fluid"> -->
+	            <img src="{% static 'imagenes/fondo_.jpg' %}" alt="mujer asignando tareas" class="img-fluid">
+       
+
+	        </div>
+	        <div class="col-md-6 text-center">
+	            <p>Para acceder a todas las funcionalidades de nuestra aplicación, asegúrate de estar autenticado.</p>
+	            <a href="{% url 'inicio_sesion' %}" class="btn btn-primary me-2">Iniciar sesión</a>
+	            <a href="{% url 'registro_usuario' %}" class="btn btn-secondary">Registrarse</a>
+	        </div>
+	    </div>
+	</div>
+    
+	
 	
 	
 {% endif %}

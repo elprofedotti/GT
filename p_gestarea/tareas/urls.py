@@ -18,5 +18,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
 	path('chau/', views.chau, name='chau'),
 	path('agregar_tarea/', views.agregar_tarea, name='agregar_tarea'),
-	path('agregar_tareaSQL/', views.agregar_tarea, name='agregar_tareaSQL'),
+	path('agregar_tareaSQL/', views.agregar_tareaSQL, name='agregar_tareaSQL'),
+	 path('agregar_tarea_admin/', views.agregar_tarea_admin, name='agregar_tarea_admin'), 
 ]

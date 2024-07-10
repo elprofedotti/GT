@@ -3,7 +3,7 @@ from .models import Tarea, Comentario, Categoria
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CambioTareaForm, TareaFormSQL, TareaForm
+from .forms import CambioTareaForm, TareaFormSQL, TareaForm, TareaFormAdmin
 from django.db import connection
 
 from django.db.models import Q
@@ -182,8 +182,36 @@ def agregar_tareaSQL(request):
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 ''', [nombre, descripcion, fecha_vencimiento, estado, prioridad, categoria_id, asignada_a_id, es_publica])
             
-            return redirect('lista_tareas')
+            return redirect('inicio')
     else:
         form = TareaForm()
     
-    return render(request, 'tareas/agregar_tarea.html', {'form': form})
+    return render(request, 'tareas/agregar_tareaSQL.html', {'form': form})
+    
+def agregar_tarea_admin(request):
+    if not request.user.is_authenticated or not request.user.is_superuser:
+        return redirect('inicio_sesion')
+    
+    if request.method == 'POST':
+        form = TareaFormAdmin(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            descripcion = form.cleaned_data['descripcion']
+            fecha_vencimiento = form.cleaned_data['fecha_vencimiento']
+            estado = form.cleaned_data['estado']
+            prioridad = form.cleaned_data['prioridad']
+            categoria_id = form.cleaned_data['categoria'].id
+            es_publica = form.cleaned_data['es_publica']
+            asignada_a_id = form.cleaned_data['asignada_a'].id
+
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    INSERT INTO tareas_tarea (nombre, descripcion, fecha_vencimiento, estado, prioridad, categoria_id, asignada_a_id, es_publica)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ''', [nombre, descripcion, fecha_vencimiento, estado, prioridad, categoria_id, asignada_a_id, es_publica])
+            
+            return redirect('inicio')
+    else:
+        form = TareaFormAdmin()
+    
+    return render(request, 'tareas/agregar_tarea_admin.html', {'form': form})

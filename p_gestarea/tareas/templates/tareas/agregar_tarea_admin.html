@@ -1,9 +1,9 @@
 {% extends "base_generic.html" %}
-{% load form_extras %} 
+{% load form_extras %}  
 
 {% block content %}
 <div class="container form-container">
-    <h1 class="text-center">Agregar Nueva Tarea</h1>
+    <h1 class="text-center">Agregar Nueva Tarea (Admin)</h1>
     <form method="post">
         {% csrf_token %}
         <div class="mb-3">
@@ -17,7 +17,6 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label for="id_fecha_vencimiento" class="form-label">Fecha de Vencimiento</label>
-                
                 {{ form.fecha_vencimiento|add_class:"form-control" }}
             </div>
             <div class="col-md-4 mb-3">
@@ -29,9 +28,15 @@
                 {{ form.prioridad|add_class:"form-control" }}
             </div>
         </div>
-        <div class="mb-3">
-            <label for="id_categoria" class="form-label">Categoría</label>
-            {{ form.categoria|add_class:"form-control" }}
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <label for="id_categoria" class="form-label">Categoría</label>
+                {{ form.categoria|add_class:"form-control" }}
+            </div>
+            <div class="col-md-6 mb-2">
+                <label for="id_asignada_a" class="form-label">Asignada a</label>
+                {{ form.asignada_a|add_class:"form-control" }}
+            </div>
         </div>
         <div class="mb-3 form-check">
             {{ form.es_publica|add_class:"form-check-input" }} 

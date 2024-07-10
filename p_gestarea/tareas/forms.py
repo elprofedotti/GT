@@ -1,5 +1,6 @@
 from django import forms
-from .models import Tarea, Categoria
+from .models import Tarea, Categoria, User
+
 
 #class TareaForm(forms.ModelForm):
     # class Meta:
@@ -39,4 +40,20 @@ class TareaFormSQL(forms.ModelForm):
     prioridad = forms.ChoiceField(choices=[('BAJA', 'Baja'), ('MEDIA', 'Media'), ('ALTA', 'Alta')])
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all())
     es_publica = forms.BooleanField(required=False)
+
+
+class TareaFormAdmin(forms.ModelForm):
+    nombre = forms.CharField(max_length=200)
+    descripcion = forms.CharField(widget=forms.Textarea)
+    fecha_vencimiento = forms.DateTimeField(widget=forms.DateInput(attrs={'type': 'date'}))
+    estado = forms.ChoiceField(choices=[('PENDIENTE', 'Pendiente'), ('EN_PROGRESO', 'En Progreso'), ('COMPLETADA', 'Completada')])
+    prioridad = forms.ChoiceField(choices=[('BAJA', 'Baja'), ('MEDIA', 'Media'), ('ALTA', 'Alta')])
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all())
+    es_publica = forms.BooleanField(required=False)
+    asignada_a = forms.ModelChoiceField(queryset=User.objects.all(), label="Asignada a")
+
+    class Meta:
+        model = Tarea
+        fields = ['nombre', 'descripcion', 'fecha_vencimiento', 'estado', 'prioridad', 'categoria', 'es_publica', 'asignada_a']
+
 
