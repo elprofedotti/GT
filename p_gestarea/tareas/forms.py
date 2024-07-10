@@ -31,17 +31,6 @@ class TareaForm(forms.ModelForm):
             'fecha_vencimiento': forms.DateInput(attrs={'type': 'date'}),
         }
 
-
-class TareaFormSQL(forms.ModelForm):
-    nombre = forms.CharField(max_length=200)
-    descripcion = forms.CharField(widget=forms.Textarea)
-    fecha_vencimiento = forms.DateTimeField(widget=forms.DateInput(attrs={'type': 'date'}))
-    estado = forms.ChoiceField(choices=[('PENDIENTE', 'Pendiente'), ('EN_PROGRESO', 'En Progreso'), ('COMPLETADA', 'Completada')])
-    prioridad = forms.ChoiceField(choices=[('BAJA', 'Baja'), ('MEDIA', 'Media'), ('ALTA', 'Alta')])
-    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all())
-    es_publica = forms.BooleanField(required=False)
-
-
 class TareaFormAdmin(forms.ModelForm):
     nombre = forms.CharField(max_length=200)
     descripcion = forms.CharField(widget=forms.Textarea)

@@ -1,13 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect # type: ignore
 from .models import Tarea, Comentario, Categoria
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CambioTareaForm, TareaFormSQL, TareaForm, TareaFormAdmin
-from django.db import connection
-
-from django.db.models import Q
-
+from django.contrib.auth.models import User # type: ignore
+from django.contrib.auth import authenticate, login # type: ignore
+from django.contrib.auth.forms import UserCreationForm # type: ignore
+from .forms import CambioTareaForm, TareaForm, TareaFormAdmin
+from django.db import connection # type: ignore
+from django.db.models import Q # type: ignore
 
 	
 def inicio(request):
@@ -66,7 +64,7 @@ def detalle_tarea(request, id_tarea):
 def cambiar_estado_tarea(request, tarea_id):
     # Comprobar si el usuario está autenticado
     if not request.user.is_authenticated:
-        return HttpResponseForbidden('No tienes permiso para realizar esta acción.')
+        return HttpResponseForbidden('No tienes permiso para realizar esta acción.') # type: ignore
 
     usuario_actual = request.user
 	
@@ -99,7 +97,7 @@ def cambiar_estado_tarea(request, tarea_id):
 
             return redirect('inicio')
     else:
-        return HttpResponseNotAllowed(['POST'])
+        return HttpResponseNotAllowed(['POST']) # type: ignore
 
 		
 def lista_categorias(request):
